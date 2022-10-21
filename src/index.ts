@@ -52,6 +52,13 @@ const useAckee = (
     }).stop;
   }, [ackeeInstance, pathname, environment.domainId]);
 
+  if (!ackeeInstance) {
+    console.warn(
+      "AckeeInstance was unable to be created. Actions are unable to be returned."
+    );
+    return;
+  }
+
   /**
    * Create a new action using an event id.
    * @typedef {Function} AckeeAction
@@ -64,7 +71,7 @@ const useAckee = (
     eventId: string,
     attributes: ackeeTracker.ActionAttributes,
     callback?: (actionId: string) => void
-  ) => ackeeInstance?.action(eventId, attributes, callback);
+  ) => ackeeInstance.action(eventId, attributes, callback);
 
   /**
    * Update an existing action with the given attributes
@@ -76,7 +83,7 @@ const useAckee = (
   const updateAction = (
     actionId: string,
     attributes: ackeeTracker.ActionAttributes
-  ) => ackeeInstance?.updateAction(actionId, attributes);
+  ) => ackeeInstance.updateAction(actionId, attributes);
 
   /**
    * Update the record for the current ackee instance.
@@ -85,7 +92,7 @@ const useAckee = (
    * @returns void
    */
   const updateRecord = (recordId: string) =>
-    ackeeInstance?.updateRecord(recordId);
+    ackeeInstance.updateRecord(recordId);
 
   return { action, updateAction, updateRecord };
 };

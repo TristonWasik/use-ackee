@@ -12,8 +12,8 @@ declare const useAckee: (pathname: string, environment: {
     server: string;
     domainId: string;
 }, options?: ackeeTracker.TrackingOptions) => {
-    action: (eventId: string, attributes: ackeeTracker.ActionAttributes, callback?: ((actionId: string) => void) | undefined) => void | undefined;
-    updateAction: (actionId: string, attributes: ackeeTracker.ActionAttributes) => void | undefined;
-    updateRecord: (recordId: string) => ackeeTracker.AckeeTrackingReturn | undefined;
-};
+    action: (eventId: string, attributes: ackeeTracker.ActionAttributes, callback?: ((actionId: string) => void) | undefined) => void;
+    updateAction: (actionId: string, attributes: ackeeTracker.ActionAttributes) => void;
+    updateRecord: (recordId: string) => ackeeTracker.AckeeTrackingReturn;
+} | undefined;
 export default useAckee;

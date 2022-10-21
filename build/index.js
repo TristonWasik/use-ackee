@@ -37,6 +37,10 @@ const useAckee = (pathname, environment, options = {}) => {
             siteLocation: url.href,
         }).stop;
     }, [ackeeInstance, pathname, environment.domainId]);
+    if (!ackeeInstance) {
+        console.warn("AckeeInstance was unable to be created. Actions are unable to be returned.");
+        return;
+    }
     /**
      * Create a new action using an event id.
      * @typedef {Function} AckeeAction
