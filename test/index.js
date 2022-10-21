@@ -1,10 +1,8 @@
-'use strict'
+import { assert } from 'chai';
+import { useAckee } from './../build/index.js';
 
-const assert = require('chai').assert
-const index = require('./../src/index')
-
-describe('index', function() {
-	it('should be a function', function() {
-		assert.isFunction(index)
+describe('index', function () {
+	it('should be a function', function () {
+		assert.isFunction(useAckee)
 	})
 })
