@@ -1,7 +1,6 @@
 import { useMemo, useEffect } from "react";
 import * as ackeeTracker from "ackee-tracker";
 const isBrowser = typeof window !== "undefined";
-export var ackeeInstance;
 /**
  * Use Ackee in React.
  * Creates an instance once and a new record every time the pathname changes.
@@ -11,7 +10,7 @@ export var ackeeInstance;
  * @param {ackeeTracker.TrackingOptions} options - Ackee options.
  */
 export const useAckee = (pathname, environment, options = {}) => {
-    ackeeInstance = useMemo(() => {
+    const ackeeInstance = useMemo(() => {
         if (isBrowser === false)
             return;
         return ackeeTracker.create(environment.server, options);
@@ -37,6 +36,24 @@ export const useAckee = (pathname, environment, options = {}) => {
             siteLocation: url.href,
         }).stop;
     }, [ackeeInstance, pathname, environment.domainId]);
+    /**
+     * Create a new action using an event id.
+     * @param eventId string
+     * @param attributes ActionAttributes
+     */
+    const action = (eventId, attributes, callback) => ackeeInstance?.action(eventId, attributes, callback);
+    /**
+     * Update an existing action with the given attributes
+     * @param actionId string
+     * @param attributes ActionAttributes
+     */
+    const updateAction = (actionId, attributes) => ackeeInstance?.updateAction(actionId, attributes);
+    /**
+     * Update the record for the current ackee instance.
+     * @param recordId
+     */
+    const updateRecord = (recordId) => ackeeInstance?.updateRecord(recordId);
+    return [action, updateAction, updateRecord];
 };
 export default useAckee;
 //# sourceMappingURL=index.js.map

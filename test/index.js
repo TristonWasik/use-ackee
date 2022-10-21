@@ -1,12 +1,8 @@
-import { assert, expect } from 'chai';
-import { useAckee, ackeeInstance } from './../build/index.js';
-import * as ackeeTracker from "ackee-tracker";
+import { assert } from 'chai';
+import { useAckee } from './../build/index.js';
 
 describe('index', function () {
 	it('should be a function', function () {
 		assert.isFunction(useAckee)
-	})
-	it('ackeeInstance should be ackeeTracker.ackeeInstance type', () => {
-		expect(ackeeInstance).to.be.a(typeof ackeeTracker.ackeeInstance)
 	})
 })

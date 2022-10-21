@@ -1,5 +1,4 @@
 import * as ackeeTracker from "ackee-tracker";
-export declare var ackeeInstance: ackeeTracker.AckeeInstance | undefined;
 /**
  * Use Ackee in React.
  * Creates an instance once and a new record every time the pathname changes.
@@ -11,5 +10,5 @@ export declare var ackeeInstance: ackeeTracker.AckeeInstance | undefined;
 export declare const useAckee: (pathname: string, environment: {
     server: string;
     domainId: string;
-}, options?: ackeeTracker.TrackingOptions) => void;
+}, options?: ackeeTracker.TrackingOptions) => (((eventId: string, attributes: ackeeTracker.ActionAttributes, callback?: ((actionId: string) => void) | undefined) => void | undefined) | ((recordId: string) => ackeeTracker.AckeeTrackingReturn | undefined))[];
 export default useAckee;
