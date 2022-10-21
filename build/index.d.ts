@@ -6,9 +6,14 @@ import * as ackeeTracker from "ackee-tracker";
  * @param {String} pathname - Current path.
  * @param {Object} environment - Object containing the URL of the Ackee server and the domain id.
  * @param {ackeeTracker.TrackingOptions} options - Ackee options.
+ * @returns {Object} { action, updateAction, updateRecord }
  */
-export declare const useAckee: (pathname: string, environment: {
+declare const useAckee: (pathname: string, environment: {
     server: string;
     domainId: string;
-}, options?: ackeeTracker.TrackingOptions) => (((eventId: string, attributes: ackeeTracker.ActionAttributes, callback?: ((actionId: string) => void) | undefined) => void | undefined) | ((recordId: string) => ackeeTracker.AckeeTrackingReturn | undefined))[];
+}, options?: ackeeTracker.TrackingOptions) => {
+    action: (eventId: string, attributes: ackeeTracker.ActionAttributes, callback?: ((actionId: string) => void) | undefined) => void | undefined;
+    updateAction: (actionId: string, attributes: ackeeTracker.ActionAttributes) => void | undefined;
+    updateRecord: (recordId: string) => ackeeTracker.AckeeTrackingReturn | undefined;
+};
 export default useAckee;

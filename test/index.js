@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { useAckee } from './../build/index.js';
+import useAckee from './../build/index.js';
 
 describe('index', function () {
 	it('should be a function', function () {

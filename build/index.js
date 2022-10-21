@@ -8,8 +8,9 @@ const isBrowser = typeof window !== "undefined";
  * @param {String} pathname - Current path.
  * @param {Object} environment - Object containing the URL of the Ackee server and the domain id.
  * @param {ackeeTracker.TrackingOptions} options - Ackee options.
+ * @returns {Object} { action, updateAction, updateRecord }
  */
-export const useAckee = (pathname, environment, options = {}) => {
+const useAckee = (pathname, environment, options = {}) => {
     const ackeeInstance = useMemo(() => {
         if (isBrowser === false)
             return;
@@ -38,22 +39,29 @@ export const useAckee = (pathname, environment, options = {}) => {
     }, [ackeeInstance, pathname, environment.domainId]);
     /**
      * Create a new action using an event id.
+     * @typedef {Function} AckeeAction
      * @param eventId string
      * @param attributes ActionAttributes
+     * @param callback
+     * @returns void
      */
     const action = (eventId, attributes, callback) => ackeeInstance?.action(eventId, attributes, callback);
     /**
      * Update an existing action with the given attributes
+     * @typedef {Function} AckeeUpdateAction
      * @param actionId string
      * @param attributes ActionAttributes
+     * @returns void
      */
     const updateAction = (actionId, attributes) => ackeeInstance?.updateAction(actionId, attributes);
     /**
      * Update the record for the current ackee instance.
+     * @typedef {Function} AckeeUpdateRecord
      * @param recordId
+     * @returns void
      */
     const updateRecord = (recordId) => ackeeInstance?.updateRecord(recordId);
-    return [action, updateAction, updateRecord];
+    return { action, updateAction, updateRecord };
 };
 export default useAckee;
 //# sourceMappingURL=index.js.map
