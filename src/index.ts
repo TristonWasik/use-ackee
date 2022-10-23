@@ -67,7 +67,7 @@ const useAckee = (
    * @param callback
    * @returns void
    */
-  const action = (
+  const createAction = (
     eventId: string,
     attributes: ackeeTracker.ActionAttributes,
     callback?: (actionId: string) => void
@@ -94,7 +94,7 @@ const useAckee = (
   const updateRecord = (recordId: string) =>
     ackeeInstance.updateRecord(recordId);
 
-  return { action, updateAction, updateRecord };
+  return { createAction, updateAction, updateRecord };
 };
 
 export default useAckee;
